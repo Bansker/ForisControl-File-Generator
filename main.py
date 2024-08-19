@@ -10,24 +10,37 @@ import src.globals as gb
 
 # --- CONSTANTS --- #
 BATFILE = 'manage_files.bat'
-BATFILE_CONTENT = '@echo off\n..\..\..\python_3_11_7\python ..\..\..\manage_files.py'
+BATFILE_CONTENT = '@echo off\npython ..\..\..\manage_files.py'
+
+""" def get_shuffled_string(string):
+  string_list = [letter for letter in string]
+  string_list_shuffled = random.shuffle(string_list)
+  string_shuffled = ''.join(string_list_shuffled)
+  
+  return string_shuffled """
 
 
 # --- FUNCTION DEFINITIONS --- #
+def get_shuffled_string(charstring):
+  list_chars = [letter for letter in charstring]
+  random.shuffle(list_chars)
+  return ''.join(list_chars)
+
+
 def gen_passw_12():
   """ -----------------------------------------------------------
   Function Name: gen_passw_12\n
   Description: generates a random 12 Char Letter and Number password 
   """
 
-  ASCII_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  ASCII_NUMS    = '0123456789'
+  ASCII_LETTERS = get_shuffled_string('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+  ASCII_NUMS    = get_shuffled_string('0123456789') 
   pw = ''
   for i in range(6):
     pw = pw + random.choice(ASCII_LETTERS) + random.choice(ASCII_NUMS)
     pw = ''.join(random.sample(pw, len(pw)))
-
-  return pw
+    
+  return get_shuffled_string(pw)
 
 
 def create_device_list(serial, rows):
